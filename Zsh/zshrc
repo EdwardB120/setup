@@ -1,0 +1,45 @@
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+ZSH_THEME=""
+fpath+=($HOME/.zsh/pure)
+autoload -U promptinit; promptinit
+prompt pure
+
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# Configs
+config() {
+  helpMessage="\n--open    Open the config specified.\n--list    List the configs in the directory specified.\n--help    List available commands."
+  invalidCommandMessage="\nInvalid command. Use --help for more information."
+  invalidConfigMessage="\nInvalid config. The following configs are available for this command:"
+
+  if [[ "$1" == "" ]] || [[ "$1" == "--help" ]] ; then
+    echo $helpMessage
+  elif [[ "$1" == "--open" ]] ; then
+    if [[ "$2" == "zsh" ]] ; then
+      code ~/.zshrc
+    elif [[ $2 == "bash" ]] ; then
+      code ~/.bashrc
+    elif [[ $2 == "ssh" ]] ; then
+      code ~/.ssh/config
+    elif [[ $2 == "git" ]] ; then
+      code ~/.gitconfig
+    elif [[ $2 == "hosts" ]] ; then
+      code ~/../../etc/hosts
+    else
+      echo "$invalidConfigMessage zsh,bash,ssh,git"
+    fi
+  elif [[ "$1" == "list" ]] ; then
+    if [[ "$2" == "ssh" ]] ; then
+      ls ~/.ssh/
+    else
+      echo "$invalidCommandMessage ssh"
+    fi
+  else
+    echo $invalidCommandMessage
+  fi
+}
