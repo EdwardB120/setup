@@ -7,20 +7,44 @@ fpath+=($HOME/.zsh/pure)
 autoload -U promptinit; promptinit
 prompt pure
 
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# Configs
 config() {
-  helpMessage="\n--open    Open the config specified.\n--list    List the configs in the directory specified.\n--help    List available commands."
-  invalidCommandMessage="\nInvalid command. Use --help for more information."
-  invalidConfigMessage="\nInvalid config. The following configs are available for this command:"
+  messageUsage="""
+  usage: 
+    config <command> <config>
+  help:
+    config --help
+    config <command> --help
+  commands:
+    open    opens the config specified"""
+
+  messageCommands="""
+  usage:
+    config open <config>
+  configs:
+    zsh
+    bash
+    ssh
+    git
+    hosts"""
+
+  messageInvalidCommand="\nInvalid command. See --help."
+  messageInvalidConfig="\nInvalid config. See --help."
 
   if [[ "$1" == "" ]] || [[ "$1" == "--help" ]] ; then
-    echo $helpMessage
-  elif [[ "$1" == "--open" ]] ; then
-    if [[ "$2" == "zsh" ]] ; then
+    echo $messageUsage
+  elif [[ "$1" == "open" ]] ; then
+    if [[ "$2" == "--help" ]] ; then
+      echo $messageCommands
+    elif [[ "$2" == "zsh" ]] ; then
       code ~/.zshrc
     elif [[ $2 == "bash" ]] ; then
       code ~/.bashrc
@@ -29,17 +53,11 @@ config() {
     elif [[ $2 == "git" ]] ; then
       code ~/.gitconfig
     elif [[ $2 == "hosts" ]] ; then
-      code ~/../../etc/hosts
+      code /etc/hosts
     else
-      echo "$invalidConfigMessage zsh,bash,ssh,git"
-    fi
-  elif [[ "$1" == "list" ]] ; then
-    if [[ "$2" == "ssh" ]] ; then
-      ls ~/.ssh/
-    else
-      echo "$invalidCommandMessage ssh"
+      echo $messageInvalidConfig
     fi
   else
-    echo $invalidCommandMessage
+    echo $messageInvalidCommand
   fi
 }
