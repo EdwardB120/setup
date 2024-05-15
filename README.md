@@ -15,6 +15,7 @@ The purpose of this project is to contain everything I need to setup a new MacBo
 7. [Git](https://git-scm.com/download/mac): Source code manager.
     - Configs:
         - Copy `./Git/*` to `~/*`.
+        - Create a new `ssh` key for work: [GitHub SSH Guide](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
         - Copy `./SSH/config` to `~/.ssh/config`.
 8. [Visual Studio Code](https://code.visualstudio.com/): Code editor.
     - Config: Import `./Visual Studio Code/Edward.code-profile`.

@@ -1,11 +1,24 @@
+# -----------------------------------------------------------------------------------------
+# https://www.openssh.com/
+# -----------------------------------------------------------------------------------------
+# eval "$(ssh-agent -s)"                            Start/restart the ssh agent.
+# ssh-add --apple-use-keychain ~/.ssh/<file_name>   Add a ssh key.
+# ssh-add -L                                        List all of the active ssh keys.
+# ssh-add -D                                        Delete all of the active ssh keys.
+# ssh -vT <host_name>                               Test your connection with verbose logs.
+# -----------------------------------------------------------------------------------------
+#
+# git clone git@github.com:my_username/repo.git
+# ssh -vT git@github.com
 Host github.com
-	HostName github.com
-	AddKeysToAgent yes
-	UseKeychain yes
-	IdentityFile ~/.ssh/work
-
+  HostName github.com
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentityFile ~/.ssh/id_ed25519
+# git clone git@personal:my_username/repo.git
+# ssh -vT git@personal
 Host personal
-	Hostname github.com
-	AddKeysToAgent yes
-	UseKeychain yes
-	IdentityFile ~/.ssh/personal
+  Hostname github.com
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentityFile ~/.ssh/personal
